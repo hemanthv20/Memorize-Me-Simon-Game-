@@ -34,13 +34,10 @@ function checkAnswer(currentLevel) {
         playSound("wrong");
         $("body").addClass("game-over");
         setTimeout(() => $("body").removeClass("game-over"), 500);
-        $("#level-title").text("Game Over, Click to Restart");
-
-        // Restart game on next click/touch
-        $(document).one("click touchstart", function () {
-            startOver();
-            newSequence();
-        });
+        
+        // Reset to start screen
+        $("#level-title").text("Click to Start");
+        startOver();
     }
 }
 
