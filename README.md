@@ -43,18 +43,5 @@ Make sure to include **sound files** in the `sounds/` folder for button clicks a
 2. Open `index.html` in your browser.
 3. Start playing and test your memory skills!
 
-## 📌 Screenshots
-### 📍 Game Start
-![Game Start](https://via.placeholder.com/400x200?text=Click+to+Start)
-
-### 📍 Level Progression
-![Level Progression](https://via.placeholder.com/400x200?text=Level+2)
-
-### 📍 Game Over
-![Game Over](https://via.placeholder.com/400x200?text=Game+Over)
-
-## 📜 License
-This project is open-source. Feel free to modify and improve it!
-
 ## 🎉 Have Fun & Enjoy Playing!
 
