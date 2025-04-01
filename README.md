@@ -23,7 +23,7 @@ Memorize Me is a simple memory-based game inspired by the classic **Simon Game**
 
 ## 📁 Project Structure
 ```
-/your-project-folder
+/Memorize-Me-Simon-Game-
 │-- index.html      # Main HTML file
 │-- styles.css      # Styling for the game
 │-- game.js         # JavaScript logic
