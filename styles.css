@@ -69,6 +69,23 @@ h2{
   font-weight: 200;
 }
 
+#restart-btn {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 1.5rem;
+  font-family: 'Press Start 2P', cursive;
+  border: none;
+  background-color: #ff4747;
+  color: white;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
 @media (max-width: 600px) {
   .btn {
     height: 100px;
