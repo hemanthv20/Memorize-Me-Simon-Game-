@@ -1,18 +1,21 @@
 var gamePattern = [];
 var buttonColours = ["red", "blue", "green", "yellow"];
 var userClickedPattern = [];
-
 var started = false;
 var level = 0;
 
-// Start the game on first click or touch
-$(document).on("click touchstart", function () {
+// Function to start game when user clicks/touches
+function startGame() {
     if (!started) {
-        $("#level-title").text("Level " + level);
-        newSequence();
         started = true;
+        $("#level-title").text("Level " + level);
+        $("#restart-btn").addClass("hidden"); // Hide restart button
+        newSequence();
     }
-});
+}
+
+// Attach event listener for starting the game
+$(document).on("click touchstart", startGame);
 
 // Handle button clicks
 $('.btn').click(function () {
@@ -34,9 +37,11 @@ function checkAnswer(currentLevel) {
         playSound("wrong");
         $("body").addClass("game-over");
         setTimeout(() => $("body").removeClass("game-over"), 500);
-        
-        // Reset to start screen
-        $("#level-title").text("Click to Start");
+
+        // Show "Game Over" message and restart button
+        $("#level-title").text("Game Over");
+        $("#restart-btn").removeClass("hidden");
+
         startOver();
     }
 }
@@ -65,9 +70,16 @@ function animatePress(currentColour) {
     setTimeout(() => $('#' + currentColour).removeClass("pressed"), 100);
 }
 
-// Reset the game
+// Reset the game and wait for new start
 function startOver() {
     level = 0;
     gamePattern = [];
     started = false;
+
+    // Remove event listener and reattach it when restart button is clicked
+    $(document).off("click touchstart", startGame);
+    $("#restart-btn").click(function () {
+        $(document).on("click touchstart", startGame);
+        startGame();
+    });
 }
