@@ -3,16 +3,17 @@ var buttonColours = ["red", "blue", "green", "yellow"];
 var userClickedPattern = [];
 
 var started = false;
-
 var level = 0;
 
-$(document).one("click touchstart", function() {
-    if(!started) {
+function startGame() {
+    if (!started) {
         $("#level-title").text("Level " + level);
         newSequence();
         started = true;
     }
-});
+}
+
+$(document).on("click touchstart", startGame);
 
 $('.btn').click(function() {
     var userChosenColour = $(this).attr("id");
@@ -20,39 +21,40 @@ $('.btn').click(function() {
     
     playSound(userChosenColour);
     animatePress(userChosenColour);
-    checkAnswer(userClickedPattern.length-1);
-})
+    checkAnswer(userClickedPattern.length - 1);
+});
 
 function checkAnswer(currentLevel) {
-    if(gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
+    if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
         console.log("success");
 
-        if(userClickedPattern.length === gamePattern.length) {
+        if (userClickedPattern.length === gamePattern.length) {
             setTimeout(function() {
                 newSequence();
             }, 1000);
         }
-    }else {
+    } else {
         console.log("wrong");
         playSound("wrong");
         $("body").addClass("game-over");
         setTimeout(function() {
             $("body").removeClass("game-over");
         }, 500);
-        $("#level-title").text("Game Over, Press Any Key to Restart");
-        startOver();
+        $("#level-title").text("Game Over, Click to Restart");
+
+        $(document).one("click touchstart", function() {
+            startOver();
+            startGame();
+        });
     }
 }
 
 function newSequence() {
-
     userClickedPattern = [];
-
     level++;
     $("#level-title").text("Level " + level);
     
     var randomNumber = Math.floor(Math.random() * 4);
-
     var randomChosenColour = buttonColours[randomNumber];
     
     gamePattern.push(randomChosenColour);
@@ -70,7 +72,7 @@ function animatePress(currentColour) {
     $('#' + currentColour).addClass("pressed");
     setTimeout(function() {
         $('#' + currentColour).removeClass("pressed");
-    },100);
+    }, 100);
 }
 
 function startOver() {
